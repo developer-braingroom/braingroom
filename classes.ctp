@@ -1,49 +1,57 @@
+<?php 
+// echo "<pre>";
+//print_r($view_class);
+//echo "</pre>";
+//print_r($segment);die;
+//print_r($class_status);die;
+$class_img=$view_class['VendorClasse']['upload_class_photo'];
+if($class_img=='')
+{
+    $class_img='defult_pic.png';
+}
+?>
 <style type="text/css">
-	.add_top1 {
-	    padding-top: 0px!important;
-	}
-	.ruth6542{
-		padding-left: 0px!important; margin-bottom: 30px;
-		}
-	.provider-name{
-		cursor: pointer;
-		}
+.add_top1 {
+    padding-top: 0px!important;
+}
+.ruth6542{padding-left: 0px!important; margin-bottom: 30px;}
+.provider-name{ cursor: pointer;}
 </style>
 <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r">
   <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r">
     <!-- <a href="http://braingroom.com/braingroom/homes/kids"> -->
       <?php     
-        if($class['VendorClasse']['category_id'] == 1){?>
+        if($view_class['VendorClasse']['category_id'] == 1){?>
         <a href="<?php echo HTTP_ROOT;?>/braingroom/homes/fun/1">
             <img src="<?php echo HTTP_ROOT;?>/img/profile_img/fun.jpg" class="img-responsive" alt="">
         </a>
       <?php }?>
       <?php     
-        if($class['VendorClasse']['category_id'] == 2){?>
+        if($view_class['VendorClasse']['category_id'] == 2){?>
         <a href="<?php echo HTTP_ROOT;?>/braingroom/homes/fun/2">
             <img src="<?php echo HTTP_ROOT;?>/img/profile_img/informative.jpg" class="img-responsive" alt="">
         </a>
       <?php }?>
       <?php     
-        if($class['VendorClasse']['category_id'] == 3){?>
+        if($view_class['VendorClasse']['category_id'] == 3){?>
         <a href="<?php echo HTTP_ROOT;?>/braingroom/homes/fun/3">
             <img src="<?php echo HTTP_ROOT;?>/img/profile_img/health.jpg" class="img-responsive" alt="">
         </a>
       <?php }?>
       <?php     
-        if($class['VendorClasse']['category_id'] == 4){?>
+        if($view_class['VendorClasse']['category_id'] == 4){?>
         <a href="<?php echo HTTP_ROOT;?>/braingroom/homes/fun/4">
             <img src="<?php echo HTTP_ROOT;?>/img/profile_img/kids.jpg" class="img-responsive" alt="">
         </a>
       <?php }?>
       <?php     
-        if($class['VendorClasse']['category_id'] == 5){?>
+        if($view_class['VendorClasse']['category_id'] == 5){?>
         <a href="<?php echo HTTP_ROOT;?>/braingroom/homes/fun/5">
             <img src="<?php echo HTTP_ROOT;?>/img/profile_img/education.jpg" class="img-responsive" alt="">
         </a>
       <?php }?>
       <?php     
-        if($class['VendorClasse']['category_id'] == 6){?>
+        if($view_class['VendorClasse']['category_id'] == 6){?>
         <a href="<?php echo HTTP_ROOT;?>/braingroom/homes/fun/6">
             <img src="<?php echo HTTP_ROOT;?>/img/profile_img/hme_mntc.jpg" class="img-responsive" alt="">
         </a>
@@ -64,18 +72,36 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r add_top_13a">
                     <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r weight_brd class-title-div">
                         <div class="col-md-8 col-sm-8 col-xs-12">
-                            <p class="weight_loss class-title-heading class-title-heading-first" ><?php echo ucfirst($class['VendorClasse']['class_topic']);?></p>
+                            <p class="weight_loss class-title-heading class-title-heading-first" ><?php echo ucfirst($view_class['VendorClasse']['class_topic']);?></p>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12" style="padding:0px; margin-top:10px;">
                             <div class="col-md-12 col-sm-12 col-xs-12 padd_thirty post-class-head">
-                                <p class="provider-name class-title-heading class-user-title-heading pull-right" id="<?php echo $class['VendorClasse']['user_id'];?>">By <?php echo ucfirst($class['User']['first_name'].''.$class['User']['last_name']);?></p>
+                                <p class="provider-name class-title-heading class-user-title-heading pull-right" id="<?php echo $view_class['VendorClasse']['user_id'];?>">By <?php echo ucfirst($view_class[0]['VendorClasse']['class_by']);?></p>
                                 <?php 
-                                   $profile_img=$class['User']['profile_image'];
-                                   $user_type_id=$class['User']['user_type_id'];
-						           if(!empty($class['User']['profile_image'])):?>
-						           		<img src="<?php echo HTTP_ROOT;?>/img/Vendor/profile/<?php echo $class['User']['profile_image']; ?>" 
-						           		id="profile-pic<?php echo $class['VendorClasse']['user_id'];?>" class="georgeimg prflimg pull-right profile-img"> 
-						          <?php endif; ?>
+                                   $profile_img=$user_view['UserMaster']['profile_image'];
+                                
+                                   $user_type_id=$user_view['UserMaster']['user_type_id'];
+                                   //echo $user_type_id;
+                                   //die;
+                                   if($profile_img!='' and $user_type_id==1)
+                                   {
+                                    ?>
+                                     <img src="<?php echo HTTP_ROOT;?>/img/Vendor/profile/<?php echo $profile_img; ?>" id="profile-pic<?php echo $view_class['VendorClasse']['user_id'];?>" class="georgeimg prflimg pull-right profile-img"> 
+                                     <?php
+                                     }
+                                     elseif($profile_img!='' and $user_type_id==2)
+                                     {
+                                        ?>
+                                        <img src="<?php echo HTTP_ROOT;?>/img/Buyer/profile/<?php echo $profile_img; ?>" id="profile-pic<?php echo $view_class['VendorClasse']['user_id'];?>" class="georgeimg prflimg pull-right profile-img"> 
+                                        <?php
+                                    }
+                                    elseif($profile_img!='' and $user_type_id=='')
+                                     {
+                                        ?>
+                                        <img src="<?php echo $profile_img; ?>" id="profile-pic<?php echo $view_class['VendorClasse']['user_id'];?>" class="georgeimg prflimg pull-right profile-img"> 
+                                        <?php
+                                    }
+                                ?>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12 star_class post-class-head star-divv padd_thirty pull-right">
                                 <i class="fa fa-star" aria-hidden="true"></i>
@@ -103,7 +129,7 @@
                                              <?php echo $this->Html->image('icon_fixed.png', array('alt' => 'CakePHP','class'=>'fixed_class'));?>
                                         </div>
                                         <div class="col-md-8 col-sm-9 col-xs-8 fixed_txt">                                    
-                                            <?php echo ($class['VendorClasse']['class_timing_id']==2)?'Fixed Class':'Flexible Class'; ?>
+                                            <?php echo ($view_class['VendorClasse']['class_timing_id']==2)?'Fixed Class':'Flexible Class'; ?>
                                         </div>
                                     </div>
                                 </div> 
@@ -115,14 +141,10 @@
                             <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r">
                                 <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r">
                                     <div class="col-md-12 col-sm-12 col-xs-12 padd_thirty">
+                                        <?php //echo $this->Html->image('main_banner.jpg', array('alt' => 'CakePHP','class'=>'img-responsive hath'));?>
                                         <div style="">
-                                        <?php  
-													$class_img=$class ['VendorClasse']['upload_class_photo'];
-													if($class_img=='')
-													{
-														$class_img='defult_pic.png';
-													}
-                                        	echo $this->Html->image('Vendor/class_image/'.$class_img, array('alt' => 'CakePHP','class'=>'hath class-imgg img-thumbnail db-img'));
+                                        <?php //echo $this->Html->image('Vendor/class_image/'.$view_class['VendorClasse']['upload_class_photo'], array('alt' => 'Class Image','class'=>'img-responsive hath img-thumbnail db-img'));
+                                        echo $this->Html->image('Vendor/class_image/'.$class_img, array('alt' => 'CakePHP','class'=>'hath class-imgg img-thumbnail db-img'));
                                         ?>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 webnair">
@@ -130,14 +152,26 @@
                                                 <?php echo $this->Html->image('icon_webnair.png', array('alt' => 'Class Type','class'=>'fixed_class'));?>
                                             </div>  
                                             <div class="col-md-4 col-sm-6 col-xs-4 wenair_p">
-                                                 <?php echo $class['ClassType']['types'];
+                                                 <?php 
+                                                    if($view_class['VendorClasse']['class_type_id']==1){
+                                                        echo "Workshops";
+                                                    }else if($view_class['VendorClasse']['class_type_id']==2){
+                                                         echo "Talks";
+                                                    }else if($view_class['VendorClasse']['class_type_id']==3){
+                                                         echo "Webniars";
+                                                    }
+                                                    else if($view_class['VendorClasse']['class_type_id']==''){
+                                                         echo "Webniars";
+                                                    }
+
                                                  ?>
                                             </div>
                                             <div class="col-md-1 col-sm-1 col-xs-2 wenair">
                                                 <?php echo $this->Html->image('kids_gang.png', array('alt' => 'CakePHP','class'=>'fixed_class'));?>
                                             </div>  
                                             <div class="col-md-3 col-sm-4 col-xs-3 wenair_p">
-                                               <?php echo $class['Community']['community_name'];
+                                               <?php //echo $view_class['VendorClasse']['community_name'];
+                                                    echo "Kids Gang ";
                                                ?>
                                             </div>    
                                         </div>
@@ -147,7 +181,7 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12 padd_l_r desc_clr fix-div-part">
                                         <div class="col-md-12 col-sm-12 col-xs-12 desc_cntnt clss-desc-content">
                                             <h3>Description:</h3>
-                                            <p>    <?php echo $class['VendorClasse']['class_summary'];?></p>
+                                            <p>    <?php echo $view_class['VendorClasse']['class_summary'];?></p>
                                         </div>
                                         <!-- <div class="col-md-12 col-sm-12 col-xs-12 desc_what"> -->
                                            <!--  <p>What You'll Learn</p>
@@ -184,11 +218,16 @@
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12 fee_rs first-catseg-link">
                                    
-                                                <p class="cat-seg"><strong>Category:</strong> <?php
-                                                		echo $class['Category']['category_name'];
-												 ?>
+                                                <p class="cat-seg"><strong>Category:</strong> <?php foreach ($category as $result) {
+                                                    if($result['Category']['id'] == $view_class['VendorClasse']['category_id']){
+                                                        echo $result['Category']['category_name'];
+                                                    }
+                                                } ?>
                                                 </p>
-                                                <p class="cat-seg cat-seg-item"><b>Segment:</b>                                                 </p>
+                                                <p class="cat-seg cat-seg-item"><b>Segment:</b> <?php foreach($segment as $segnment_result){
+                                                        echo $segnment_result['ClassSegment']['segment_name'];
+                                                    }?>
+                                                </p>
 
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top:-75px; padding:0px;">
@@ -197,8 +236,8 @@
                                             </div>
                                             <div class="col-md-12 col-sm-12 col-xs-12 book_1500  goolge-div-book">
                                             <div class="map_ggl map_ggllle">
-                                                <input type="hidden" name="longitude" id="longitude" value="<?php echo $class['VendorClasse']['longitude'];?> ">
-                                                <input type="hidden" name="latitude" id="latitude" value="<?php echo $class['VendorClasse']['latitude'];?> ">
+                                                <input type="hidden" name="longitude" id="longitude" value="<?php echo $view_class['VendorClasse']['longitude'];?> ">
+                                                <input type="hidden" name="latitude" id="latitude" value="<?php echo $view_class['VendorClasse']['latitude'];?> ">
                                                 <div id="gmap" class="ggl_map ggllle_map"></div>
                                             </div>
                                         </div>
@@ -220,14 +259,22 @@
                         <div class="col-md-4 col-sm-4 col-xs-12 rs_fty right-sidebar">
                             <div class="col-md-12 col-sm-12 col-xs-12 book_1500 right-book-first">
                                 <div class="col-md-12 col-sm-12 col-xs-12 sr_pv_padding_lr right-book-content-first">
-                                <div class="col-sm-12 col-xs-6 fifhndrd"><h3>&#8377;<?php echo $class['VendorClasse']['price_per_head'];?></h3></div>
+                                <div class="col-sm-12 col-xs-6 fifhndrd"><h3>&#8377;<?php echo $view_class['VendorClasse']['price_per_head'];?></h3></div>
                                 <div class="col-sm-12 col-xs-6 book_center"><a href="<?php echo HTTP_ROOT;?>/Homes/bookNow"><button class="btn book_now">Book Now</button></a></div>
                                 <div class="col-md-12 col-sm-12 col-xs-12 padisplay">
                                     <div class="col-md-2 col-sm-3 col-xs-1 padd_beg">
                                         <?php echo $this->Html->image('sideicon1.png', array('alt' => 'CakePHP','class'=>'fixed_class'));?>
                                     </div>
                                     <div class="col-md-8 col-sm-9 col-xs-10 begin_lm cust-md-padd right-bgin-content booknow-content">
-                                        <?php echo $class['Level']['name'];                                         ?>                               
+                                        <?php 
+                                            if($view_class['VendorClasse']['level_id']==1){
+                                                echo "Beginners";
+                                            }else if($view_class['VendorClasse']['level_id']==2){
+                                                 echo "Intermediate";
+                                            }else if($view_class['VendorClasse']['level_id']==3){
+                                                 echo "Advance";
+                                            }
+                                         ?>                               
                                     </div>
                                 </div>      
                                 <div class="col-md-12 col-sm-12 col-xs-12 padisplay1 ">
@@ -243,23 +290,50 @@
                                         <?php echo $this->Html->image('session.png', array('alt' => 'CakePHP','class'=>'fixed_class'));?>
                                     </div>
                                     <div class="col-md-8 col-sm-9 col-xs-10 begin_lm cust-md-padd right-bgin-content booknow-content">
-                                        <?php echo $class['VendorClasse']['no_of_session'];?>
+                                        <?php echo $view_class['VendorClasse']['no_of_session'];?>
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12 padisplay1">
-										<div class="col-md-2 col-sm-3 col-xs-1 padd_beg">
-											<?php echo $this->Html->image('sideicon3.png', array('alt' => 'CakePHP','class'=>'fixed_class'));?>
-										</div>
-										<div class="col-md-8 col-sm-9 col-xs-10 begin_lm right-bgin-content  cust-md-padd booknow-content">
-											<?php echo $class['VendorClasse']['class_duration'];?>
-										</div>
+                                    <div class="col-md-2 col-sm-3 col-xs-1 padd_beg">
+                                        <?php echo $this->Html->image('sideicon3.png', array('alt' => 'CakePHP','class'=>'fixed_class'));?>
+                                    </div>
+                                    <?php 
+                                        $flexclass = $view_class['VendorClasse']['class_timing_id'];
+                                            //foreach ($shedule_class as $key => $shedule) {
+                                            //     $date = $shedule['ClassSchedule']['session_date'];
+                                            //     $current_date = date('d/m/Y');
+                                            //     if($date > $current_date){
+                                            //         print_r($shedule['ClassSchedule']['session_date']);
+                                            //     }
+                                            // }
+                                        if($flexclass == 1){
+                                    ?>
+                                        <div class="col-md-8 col-sm-9 col-xs-10 begin_lm right-bgin-content  cust-md-padd booknow-content">
+                                            <?php echo $view_class['VendorClasse']['class_duration'];?>
+                                        </div>
+                                    <?php }else{
+                                            if($flexclass == 2){
+                                        ?>
+                                        <div class="col-md-8 col-sm-9 col-xs-10 begin_lm right-bgin-content  cust-md-padd booknow-content">
+                                            <?php
+                                                // foreach ($shedule_class as $key => $shedule) {
+                                                //     $date = $shedule['ClassSchedule']['session_date'];
+                                                //     $current_date = date('d/m/Y');
+                                                //     echo $date;
+                                                //     // if($date > $current_date){
+                                                //     //     print_r($shedule['ClassSchedule']['session_date']);
+                                                //     // }
+                                                // }
+                                            ?>
+                                        </div>
+                                    <?php }}?>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12 padisplay1">
                                     <div class="col-md-2 col-sm-3 col-xs-1 padd_beg">
                                         <?php echo $this->Html->image('sideicon4.png', array('alt' => 'CakePHP','class'=>'fixed_class'));?>
                                     </div>
                                     <div class="col-md-8 col-sm-9 col-xs-10 begin_lm cust-md-padd right-bgin-content booknow-content">
-                                        <?php echo substr($class['VendorClasse']['location'],0,100),'...';?>
+                                        <?php echo substr($view_class['VendorClasse']['location'],0,100),'...';?>
                                     </div>
                                 </div>
                                  <div class="col-md-12 col-sm-12 col-xs-12 padisplay1">
@@ -268,11 +342,8 @@
                                     </div>
                                     <div class="col-md-10 col-sm-9 col-xs-10 begin_lm cust-md-padd right-bgin-content booknow-content">
                                        <?php 
-                                        if($class['VendorClasse']['age_from'] != ""){
-                                        echo $class['VendorClasse']['age_from'];?> 
-                                        To
-                                        <?php 
-                                        echo $class['VendorClasse']['age_to'];?> Yrs Age Group
+                                        if($view_class['VendorClasse']['age_from'] != ""){
+                                        echo $view_class['VendorClasse']['age_from'];?> To  <?php echo $view_class['VendorClasse']['age_to'];?> Yrs Age Group
                                         <?php }else{?>
                                         N/A
                                         <?php }?>
@@ -307,8 +378,8 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12 video-div">
                                     <h3 class="cls_loc">Video</h3>
                                     <video controls class="class-video">
-                                      <source src="" type="video/mp4">
-                                       <source src="" type="video/ogg">
+                                      <source src="<?php echo HTTP_ROOT;?>/img/Fitoor_(Theatrical_Trailer)_Full_HD(videoming.in).mp4" type="video/mp4">
+                                       <source src="mov_bbb.ogg" type="video/ogg">
                                       Your browser does not support HTML5 video.
                                     </video>
                                 </div>
@@ -339,7 +410,7 @@
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 people_aricon1">
                             <!-- work 12col -->
-                            <?php if($class['VendorClasse']['recurring_class_id'] != 0) { ?>
+                            <?php if($view_class['VendorClasse']['recurring_class_id'] != 0) { ?>
                                 <div class="col-md-12 col-sm-12 col-xs-12 recur_session">
                                     <div class="col-md-12 col-sm-12 col-xs-12 recurring">
                                         <div class="col-md-12 col-sm-12 col-xs-12 recur_book">
@@ -540,14 +611,15 @@
     </div>    
 </div>
 <?php
-    $longitude      = $class['VendorClasse']['longitude'];
-    $latitude       = $class['VendorClasse']['latitude'];
-    $class_topic    = $class['VendorClasse']['class_topic'];
-    $class_topic    = $class['VendorClasse']['class_topic'];
-    $class_summary  = $class['VendorClasse']['class_summary'];
-    $location       = $class['VendorClasse']['location'];
+    $longitude      = $view_class['VendorClasse']['longitude'];
+    $latitude       = $view_class['VendorClasse']['latitude'];
+    $class_topic    = $view_class['VendorClasse']['class_topic'];
+    $class_topic    = $view_class['VendorClasse']['class_topic'];
+    $class_summary  = $view_class['VendorClasse']['class_summary'];
+    $location       = $view_class['VendorClasse']['location'];
 ?>
 
+ 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&key=AIzaSyBTWFXzW0kk-GOyASPoip3CXq02xbhr_z4"></script> 
 <script type="text/javascript">
 // <![CDATA[
@@ -613,7 +685,9 @@ map.fitBounds(latlngbounds);
         });
 
   $('#datepicker').click(function(){
-     $( "#datepicker" ).datepicker({yearRange:'1900:2030',maxDate:0,changeYear: true, changeMonth: true });
+   
+    /* $( "#datepicker").datepicker();*/
+    $( "#datepicker" ).datepicker({yearRange:'1900:2030',maxDate:0,changeYear: true, changeMonth: true });
 
      $( "#datepicker").datepicker("show");
   })
@@ -666,6 +740,21 @@ map.fitBounds(latlngbounds);
 
 });
 
+
+// $(document).ready(function () {
+//  alert('hhh');
+//     $('#myModal2').dialog({
+//         modal: true,
+//         autoOpen: false
+//     });
+
+//     $('select').change(function () {
+//         if ($(this).val() == "1") {
+//             $('#myModal2').dialog('open');
+//         }
+//     });
+
+// });
 $('.bxslider').bxSlider({
   auto:true,
   minSlides: 1,
